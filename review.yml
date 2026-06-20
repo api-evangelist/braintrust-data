@@ -1,0 +1,90 @@
+aid: braintrust-data
+name: Braintrust
+review:
+  question: Does Braintrust expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Per the updated API Evangelist scope, HTTP Server-Sent Events (SSE) is
+    in-scope for AsyncAPI modeling. An AsyncAPI 2.6 document was created at
+    asyncapi/braintrust-data-asyncapi.yml describing Braintrust's documented
+    SSE streams: streaming function invocation (POST /v1/function/{id}/invoke
+    with stream=true) and the OpenAI-compatible AI proxy chat completions
+    stream (POST /v1/proxy/chat/completions with stream=true). No WebSocket
+    surface was modeled because none is documented.
+findings:
+  summary: |
+    Braintrust does not publish a documented public WebSocket API. The
+    Braintrust REST API at https://api.braintrust.dev/v1 is resource-oriented
+    HTTPS REST, authenticated with a Bearer API key. Real-time delivery is
+    provided as HTTP Server-Sent Events (SSE) on two documented endpoints:
+    function invocation and the AI proxy chat completions endpoint, both via
+    a stream=true flag. SSE is a one-way HTTP streaming transport and is not
+    WebSocket. No realtime, bidirectional ws:// or wss:// endpoint is
+    documented across the API reference, proxy docs, or SDKs as of the review
+    date.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.braintrust.dev/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events delivered over the function-invoke and proxy chat-completions endpoints when stream=true. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Braintrust's API reference, proxy documentation, or SDKs as of the review date.
+  endpointsConfirmedRest:
+    - POST https://api.braintrust.dev/v1/project
+    - GET  https://api.braintrust.dev/v1/project
+    - POST https://api.braintrust.dev/v1/experiment
+    - POST https://api.braintrust.dev/v1/experiment/{experiment_id}/insert
+    - POST https://api.braintrust.dev/v1/experiment/{experiment_id}/fetch
+    - POST https://api.braintrust.dev/v1/dataset
+    - POST https://api.braintrust.dev/v1/dataset/{dataset_id}/insert
+    - POST https://api.braintrust.dev/v1/project_logs/{project_id}/insert
+    - POST https://api.braintrust.dev/v1/project_logs/{project_id}/fetch
+    - POST https://api.braintrust.dev/v1/prompt
+    - POST https://api.braintrust.dev/v1/function
+    - POST https://api.braintrust.dev/v1/function/{function_id}/invoke
+    - POST https://api.braintrust.dev/v1/eval
+    - GET  https://api.braintrust.dev/v1/acl
+    - POST https://api.braintrust.dev/v1/acl/batch_update
+    - GET  https://api.braintrust.dev/v1/api_key
+    - POST https://api.braintrust.dev/v1/proxy/chat/completions
+    - POST https://api.braintrust.dev/v1/proxy/embeddings
+  endpointsConfirmedSse:
+    - POST https://api.braintrust.dev/v1/function/{function_id}/invoke (stream=true)
+    - POST https://api.braintrust.dev/v1/proxy/chat/completions (stream=true)
+sources:
+  - url: https://www.braintrust.dev/docs/api-reference
+    type: APIReference
+    note: All documented endpoints are HTTPS REST under https://api.braintrust.dev/v1; no WebSocket mentioned.
+  - url: https://github.com/braintrustdata/braintrust-openapi
+    type: OpenAPI
+    note: Official OpenAPI 3.0.3 spec; servers list https://api.braintrust.dev only. No WebSocket channels.
+  - url: https://www.braintrust.dev/docs/guides/proxy
+    type: Documentation
+    note: AI proxy is OpenAI-compatible; streaming is delivered via SSE with stream=true, not WebSocket.
+  - url: https://www.braintrust.dev/docs/guides/functions
+    type: Documentation
+    note: Function invocation supports streaming results over SSE; no WebSocket transport.
+actions:
+  asyncapiPath: asyncapi/braintrust-data-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Under the updated scope that allows
+    SSE in AsyncAPI, an AsyncAPI 2.6 document was authored for Braintrust's
+    documented SSE streams (function invocation and proxy chat completions),
+    with HTTP+SSE transport documented explicitly throughout the spec (server
+    protocol, channel bindings, info.x-transport-notes) so SSE is never
+    misrepresented as WebSocket. An AsyncAPI property was added to the two
+    apis.yml sub-APIs that carry SSE - Functions/Scorers and AI Proxy -
+    pointing at asyncapi/braintrust-data-asyncapi.yml.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

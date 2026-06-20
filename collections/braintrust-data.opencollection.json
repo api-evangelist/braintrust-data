@@ -1,0 +1,293 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust REST API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List projects", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/project"
+          },
+          "docs": "List out all projects, optionally filtered and paginated."
+        },
+        {
+          "info": { "name": "Create project", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/project",
+            "body": { "type": "json", "data": "{\n  \"name\": \"my-project\"\n}" }
+          },
+          "docs": "Create a new project; returns an existing project of the same name unmodified."
+        },
+        {
+          "info": { "name": "Get project", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/project/{{project_id}}"
+          },
+          "docs": "Get a project by its unique identifier."
+        },
+        {
+          "info": { "name": "Delete project", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/project/{{project_id}}"
+          },
+          "docs": "Delete a project by its unique identifier."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Experiments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create experiment", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment",
+            "body": { "type": "json", "data": "{\n  \"project_id\": \"{{project_id}}\",\n  \"name\": \"my-experiment\"\n}" }
+          },
+          "docs": "Create a new experiment under a project."
+        },
+        {
+          "info": { "name": "Insert experiment events", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment/{{experiment_id}}/insert",
+            "body": { "type": "json", "data": "{\n  \"events\": [\n    {\n      \"input\": {\"question\": \"What is 2+2?\"},\n      \"output\": \"4\",\n      \"expected\": \"4\",\n      \"scores\": {\"accuracy\": 1}\n    }\n  ]\n}" }
+          },
+          "docs": "Insert a set of events into the experiment."
+        },
+        {
+          "info": { "name": "Fetch experiment events", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment/{{experiment_id}}/fetch",
+            "body": { "type": "json", "data": "{\n  \"limit\": 100\n}" }
+          },
+          "docs": "Fetch the events in an experiment."
+        },
+        {
+          "info": { "name": "Summarize experiment", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/experiment/{{experiment_id}}/summarize?summarize_scores=true"
+          },
+          "docs": "Summarize the scores and metrics of an experiment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Create dataset", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/dataset",
+            "body": { "type": "json", "data": "{\n  \"project_id\": \"{{project_id}}\",\n  \"name\": \"my-dataset\"\n}" }
+          },
+          "docs": "Create a new dataset under a project."
+        },
+        {
+          "info": { "name": "Insert dataset events", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/dataset/{{dataset_id}}/insert",
+            "body": { "type": "json", "data": "{\n  \"events\": [\n    {\n      \"input\": {\"question\": \"What is the capital of France?\"},\n      \"expected\": \"Paris\"\n    }\n  ]\n}" }
+          },
+          "docs": "Insert a set of records into the dataset."
+        },
+        {
+          "info": { "name": "Fetch dataset events", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/dataset/{{dataset_id}}/fetch",
+            "body": { "type": "json", "data": "{\n  \"limit\": 100\n}" }
+          },
+          "docs": "Fetch the records in a dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Insert project logs", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/project_logs/{{project_id}}/insert",
+            "body": { "type": "json", "data": "{\n  \"events\": [\n    {\n      \"input\": {\"prompt\": \"Hello\"},\n      \"output\": \"Hi there!\",\n      \"metadata\": {\"model\": \"gpt-4o\"}\n    }\n  ]\n}" }
+          },
+          "docs": "Insert trace span / log events into a project's logs."
+        },
+        {
+          "info": { "name": "Fetch project logs", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/project_logs/{{project_id}}/fetch",
+            "body": { "type": "json", "data": "{\n  \"limit\": 100\n}" }
+          },
+          "docs": "Fetch trace span / log events from a project's logs."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Prompts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List prompts", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/prompt?project_id={{project_id}}"
+          },
+          "docs": "List out all prompts, optionally filtered by project or slug."
+        },
+        {
+          "info": { "name": "Create prompt", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/prompt",
+            "body": { "type": "json", "data": "{\n  \"project_id\": \"{{project_id}}\",\n  \"name\": \"Greeting\",\n  \"slug\": \"greeting\",\n  \"prompt_data\": {\"options\": {\"model\": \"gpt-4o\"}}\n}" }
+          },
+          "docs": "Create a new prompt under a project."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Functions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List functions", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/function?project_id={{project_id}}"
+          },
+          "docs": "List out all functions and scorers, optionally filtered by project."
+        },
+        {
+          "info": { "name": "Invoke function", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/function/{{function_id}}/invoke",
+            "body": { "type": "json", "data": "{\n  \"input\": {\"text\": \"Some text to score\"},\n  \"stream\": false\n}" }
+          },
+          "docs": "Invoke a function (prompt, code, or LLM scorer) server-side. Set stream to true for an SSE stream."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Evals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Launch eval", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/eval",
+            "body": { "type": "json", "data": "{\n  \"project_id\": \"{{project_id}}\",\n  \"data\": {\"dataset_id\": \"{{dataset_id}}\"},\n  \"task\": \"my-task-function\",\n  \"scores\": [\"Factuality\"]\n}" }
+          },
+          "docs": "Launch an evaluation that runs a task function over a dataset and applies scorers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization & ACL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List organizations", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/organization"
+          },
+          "docs": "List out all organizations the caller belongs to."
+        },
+        {
+          "info": { "name": "List ACLs", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/acl?object_type=project&object_id={{project_id}}"
+          },
+          "docs": "List ACLs for a given object type and id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Credentials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "List API keys", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/api_key"
+          },
+          "docs": "List out all API keys (without secret values)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "AI Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": { "name": "Proxy chat/completions", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/proxy/chat/completions",
+            "body": { "type": "json", "data": "{\n  \"model\": \"gpt-4o\",\n  \"messages\": [{\"role\": \"user\", \"content\": \"Hello!\"}],\n  \"stream\": false\n}" }
+          },
+          "docs": "OpenAI-compatible chat completions proxied to a model provider. Set stream to true for an SSE stream."
+        },
+        {
+          "info": { "name": "Proxy embeddings", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/proxy/embeddings",
+            "body": { "type": "json", "data": "{\n  \"model\": \"text-embedding-3-small\",\n  \"input\": \"The quick brown fox\"\n}" }
+          },
+          "docs": "OpenAI-compatible embeddings proxied to a model provider."
+        }
+      ]
+    }
+  ]
+}

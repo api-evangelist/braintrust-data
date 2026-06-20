@@ -1,0 +1,79 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Braintrust
+providerId: braintrust-data
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- LLM
+- Evaluation
+- Observability
+- LLMOps
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Braintrust documents system-wide operational limits rather than a single
+  global requests-per-second figure for the REST API. Published limits cover
+  function execution throughput, query and code-execution timeouts, and a
+  per-span payload size cap. Usage allotments (processed data, scores) and
+  data retention are governed by the plan tier. Enterprise plans can raise
+  these limits via custom agreements.
+notes: >-
+  Values reflect Braintrust's published plans-and-limits page. Confirm current
+  numbers and any per-endpoint throttling in the docs during reconciliation;
+  the proxy and self-hosted data planes may apply additional provider limits.
+sources:
+- https://www.braintrust.dev/docs/plans-and-limits
+- https://www.braintrust.dev/docs/api-reference
+responseCodes:
+  throttled: 429
+limits:
+- name: Function Executions
+  scope: account
+  metric: operations
+  limit: 10000 per 10 seconds
+  notes: System-wide cap on function execution throughput.
+- name: Query Timeout
+  scope: request
+  metric: seconds
+  limit: 30
+  notes: Maximum duration for a query before it times out.
+- name: Inline Code Timeout
+  scope: request
+  metric: seconds
+  limit: 240
+  notes: Maximum execution time for inline (4-minute) code functions.
+- name: Bundled Code Timeout
+  scope: request
+  metric: seconds
+  limit: 30
+  notes: Default maximum execution time for bundled code functions.
+- name: Per-Span Payload
+  scope: request
+  metric: megabytes
+  limit: 20
+  notes: Maximum size of an individual logged span / event payload.
+- name: Processed Data Allotment
+  scope: account
+  metric: gigabytes
+  limit: 1 (Starter) / 5 (Pro) / custom (Enterprise) per month
+  notes: Monthly included processed-data volume; overage billed per GB.
+- name: Scores Allotment
+  scope: account
+  metric: scores
+  limit: 10k (Starter) / 50k (Pro) / custom (Enterprise) per month
+  notes: Monthly included scores; overage billed per 1k.
+policies:
+- name: Tiered Limits
+  description: Allotments and retention raise from Starter to Pro to Enterprise; Enterprise supports custom limits.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter on HTTP 429 and honor any Retry-After header.
+- name: Payload Sizing
+  description: Keep individual span payloads under 20 MB; split or summarize large inputs/outputs before logging.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

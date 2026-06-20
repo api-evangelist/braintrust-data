@@ -1,0 +1,130 @@
+asyncapi: 2.6.0
+info:
+  title: Braintrust Streaming (SSE) API
+  version: '1.0'
+  description: >-
+    AsyncAPI description of Braintrust's documented HTTP Server-Sent Events
+    (SSE) streams. Braintrust does NOT expose a WebSocket API. Streaming is
+    delivered as one-way HTTP SSE over the same REST endpoints when the
+    request body sets `stream: true`: streaming function invocation and the
+    OpenAI-compatible AI proxy chat completions endpoint. This document models
+    those SSE streams; it must not be read as describing a WebSocket transport.
+  x-transport-notes: >-
+    Transport is HTTP/1.1 (or HTTP/2) with Content-Type text/event-stream.
+    The client opens a normal HTTPS POST request with `stream: true`; the
+    server holds the response open and emits `data:` SSE events until a final
+    `data: [DONE]` sentinel (proxy) or stream completion (invoke). This is a
+    unidirectional server-to-client stream, not a bidirectional WebSocket.
+  contact:
+    name: Braintrust Support
+    url: https://www.braintrust.dev/docs
+    email: support@braintrust.dev
+servers:
+  production:
+    url: api.braintrust.dev
+    protocol: https
+    description: >-
+      Braintrust US data plane. SSE streams are delivered over HTTPS POST
+      requests with stream=true; this is HTTP Server-Sent Events, not
+      WebSocket. EU data plane is api-eu.braintrust.dev.
+    security:
+      - bearerAuth: []
+defaultContentType: text/event-stream
+channels:
+  /v1/proxy/chat/completions:
+    description: >-
+      OpenAI-compatible chat completions over the AI proxy. When the request
+      sets stream=true, the response is an SSE stream of completion chunks
+      terminated by a `data: [DONE]` event.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: streamProxyChatCompletions
+      summary: Receive streamed chat completion chunks over SSE.
+      bindings:
+        http:
+          bindingVersion: '0.1.0'
+      message:
+        $ref: '#/components/messages/ChatCompletionChunk'
+  /v1/function/{function_id}/invoke:
+    description: >-
+      Server-side function invocation. When the request sets stream=true, the
+      function result is delivered as an SSE stream of progress and result
+      events.
+    parameters:
+      function_id:
+        description: The unique identifier of the function being invoked.
+        schema:
+          type: string
+          format: uuid
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.1.0'
+    subscribe:
+      operationId: streamFunctionInvoke
+      summary: Receive streamed function invocation events over SSE.
+      bindings:
+        http:
+          bindingVersion: '0.1.0'
+      message:
+        $ref: '#/components/messages/FunctionInvokeEvent'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: Authorization Bearer header carrying a Braintrust API key.
+  messages:
+    ChatCompletionChunk:
+      name: chatCompletionChunk
+      title: Chat Completion Chunk (SSE data event)
+      contentType: text/event-stream
+      summary: One SSE `data:` event carrying a partial chat completion delta.
+      payload:
+        type: object
+        properties:
+          id:
+            type: string
+          object:
+            type: string
+            example: chat.completion.chunk
+          created:
+            type: integer
+          model:
+            type: string
+          choices:
+            type: array
+            items:
+              type: object
+              properties:
+                index:
+                  type: integer
+                delta:
+                  type: object
+                  properties:
+                    role:
+                      type: string
+                    content:
+                      type: string
+                finish_reason:
+                  type: string
+                  nullable: true
+    FunctionInvokeEvent:
+      name: functionInvokeEvent
+      title: Function Invoke Event (SSE data event)
+      contentType: text/event-stream
+      summary: One SSE `data:` event carrying a chunk of the function invocation result.
+      payload:
+        type: object
+        properties:
+          type:
+            type: string
+            description: The event type, e.g. progress, console, or text/json result chunk.
+          data:
+            description: The event payload; shape depends on the function and event type.

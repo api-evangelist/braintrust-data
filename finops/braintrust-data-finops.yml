@@ -1,0 +1,104 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Braintrust
+providerId: braintrust-data
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- LLM
+- Evaluation
+- Observability
+- LLMOps
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Braintrust spend. Braintrust bills a fixed monthly platform
+  fee on the Pro plan plus usage-based charges for processed data volume (GB)
+  and scores beyond the plan's included allotment. AI/Topics inference run
+  through the platform draws against a monthly inference credit. Enterprise is
+  a negotiated annual contract. Costs scale with data volume and scoring, not
+  with headcount, since users are unlimited on all plans.
+notes: >-
+  Per-GB and per-1k-score overage rates and the Pro platform fee are subject to
+  change; verify against the Braintrust pricing page during reconciliation.
+sources:
+- https://www.braintrust.dev/pricing
+- https://www.braintrust.dev/docs/plans-and-limits
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Braintrust
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Braintrust
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Braintrust
+  PublisherName: Braintrust
+  InvoiceIssuerName: Braintrust
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Usage-Based
+meters:
+- name: platform_fee
+  description: Fixed monthly subscription fee for the Pro plan.
+  unit: subscription
+  aggregation: flat
+  dimensions:
+  - account
+  - plan
+- name: processed_data
+  description: Processed data volume in GB beyond the plan allotment, billed per GB.
+  unit: gigabytes
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: scores
+  description: Scores recorded beyond the plan allotment, billed per 1,000 scores.
+  unit: scores
+  aggregation: sum
+  dimensions:
+  - account
+  - project
+- name: ai_inference_credit
+  description: AI/Topics inference run through the platform, drawn against the monthly inference credit.
+  unit: credit
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+- name: proxy_tokens
+  description: Tokens used through the AI proxy, billed by the underlying model provider.
+  unit: tokens
+  aggregation: sum
+  dimensions:
+  - account
+  - model
+principles:
+- name: Visibility
+  description: Track processed-data GB and score counts per project; watch the monthly inference-credit burn.
+- name: Allocation
+  description: Tag projects and API keys per team/workload; map processed-data and score spend to cost centers.
+- name: Optimization
+  description: Trim oversized span payloads, sample high-volume logs, scope retention to need, and reserve heavy scoring for experiments that drive decisions.
+- name: Accountability
+  description: Assign owners per project; review GB, score, and proxy-token spend monthly against the plan allotment and budget.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

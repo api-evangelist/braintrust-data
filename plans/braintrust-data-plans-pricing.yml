@@ -1,0 +1,176 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Braintrust
+providerId: braintrust-data
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- LLM
+- Evaluation
+- Observability
+- LLMOps
+- Plans
+description: >-
+  Braintrust offers three plans - Starter (free), Pro, and Enterprise. Pricing
+  is based on processed data volume (GB) and scores rather than per-seat;
+  every plan includes unlimited users, projects, datasets, playgrounds, and
+  experiments. Each plan includes a monthly allotment of processed data and
+  scores with on-demand overage rates beyond the allotment, plus a monthly
+  AI/Topics inference credit. Data retention increases by tier.
+notes: >-
+  Figures reflect Braintrust's published plans-and-limits and pricing pages.
+  Allotments, overage rates, and the Pro platform fee can change; verify on
+  braintrust.dev/pricing during reconciliation.
+sources:
+- https://www.braintrust.dev/pricing
+- https://www.braintrust.dev/docs/plans-and-limits
+plans:
+- id: braintrust-starter
+  name: Starter
+  type: free
+  description: >-
+    Free plan for individual developers and small teams, with unlimited users
+    and on-demand pricing once free allotments are exceeded.
+  entries:
+  - label: Processed Data
+    name: processed_data
+    type: usage
+    metric: gigabytes
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 1 GB/month included, then $4 per GB
+    userMultiplied: false
+  - label: Scores
+    name: scores
+    type: usage
+    metric: scores
+    limit: 10000
+    timeFrame: month
+    geo: global
+    unit: 1000
+    price: 10k/month included, then $2.50 per 1k
+    userMultiplied: false
+  - label: Data Retention
+    name: data_retention
+    type: flat
+    metric: days
+    limit: 14
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 14 days
+    userMultiplied: false
+  - label: AI / Topics Credit
+    name: ai_credit
+    type: flat
+    metric: credit
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $10/month included inference credit
+    userMultiplied: false
+  elements:
+  - name: Unlimited Users
+  - name: Unlimited Projects
+  - name: Experiments
+  - name: Datasets
+  - name: Playgrounds
+  - name: Logging and Observability
+- id: braintrust-pro
+  name: Pro
+  type: paid
+  description: >-
+    Paid plan for growing teams and production applications, with higher
+    allotments, lower overage rates, longer retention, and advanced
+    observability and security features.
+  entries:
+  - label: Platform Fee
+    name: platform_fee
+    type: flat
+    metric: subscription
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $249 per month
+    userMultiplied: false
+  - label: Processed Data
+    name: processed_data
+    type: usage
+    metric: gigabytes
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 5 GB/month included, then $3 per GB
+    userMultiplied: false
+  - label: Scores
+    name: scores
+    type: usage
+    metric: scores
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1000
+    price: 50k/month included, then $1.50 per 1k
+    userMultiplied: false
+  - label: Data Retention
+    name: data_retention
+    type: flat
+    metric: days
+    limit: 30
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: 30 days
+    userMultiplied: false
+  - label: AI / Topics Credit
+    name: ai_credit
+    type: flat
+    metric: credit
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $249/month included inference credit
+    userMultiplied: false
+  elements:
+  - name: Everything in Starter
+  - name: Advanced Observability
+  - name: Advanced Security
+  - name: Higher Usage Limits
+- id: braintrust-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Custom plan for large organizations, with custom usage limits and
+    retention, advanced security and compliance, single sign-on, dedicated
+    support, and self-hosting / hybrid deployment options. Annual invoice.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Everything in Pro
+  - name: Custom Usage Limits
+  - name: Custom Data Retention
+  - name: Advanced Security and Compliance
+  - name: Single Sign-On (SSO)
+  - name: Self-Hosting / Hybrid Deployment
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
