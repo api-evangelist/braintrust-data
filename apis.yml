@@ -243,6 +243,10 @@ apis:
   description: OpenAI-compatible proxy for chat/completions, completions, and embeddings
     across many model providers, with caching, logging, and temporary credentials.
 common:
+- type: DomainSecurity
+  url: security/braintrust-data-domain-security.yml
+- type: Authentication
+  url: authentication/braintrust-data-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/braintrustdata
 - type: LinkedIn
@@ -257,6 +261,8 @@ common:
   url: rate-limits/braintrust-data-rate-limits.yml
 - type: FinOps
   url: finops/braintrust-data-finops.yml
+- url: https://www.braintrust.dev/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

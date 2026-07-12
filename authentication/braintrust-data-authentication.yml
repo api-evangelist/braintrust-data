@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/braintrust-data-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: API key or JWT
+  description: 'Authenticate requests with your Braintrust API key in the Authorization header,
+    e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'
+  sources:
+  - openapi/braintrust-data-openapi.yml
