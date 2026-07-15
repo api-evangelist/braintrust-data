@@ -243,6 +243,8 @@ apis:
   description: OpenAI-compatible proxy for chat/completions, completions, and embeddings
     across many model providers, with caching, logging, and temporary credentials.
 common:
+- type: AgenticAccess
+  url: agentic-access/braintrust-data-agentic-access.yml
 - type: DomainSecurity
   url: security/braintrust-data-domain-security.yml
 - type: Authentication
