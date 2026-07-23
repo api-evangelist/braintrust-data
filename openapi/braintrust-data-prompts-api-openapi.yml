@@ -1,0 +1,278 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Prompts API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Prompts
+paths:
+  /v1/prompt:
+    get:
+      operationId: getPrompt
+      tags:
+      - Prompts
+      summary: List prompts
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: project_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: prompt_name
+        in: query
+        schema:
+          type: string
+      - name: slug
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a list of prompts.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postPrompt
+      tags:
+      - Prompts
+      summary: Create prompt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePrompt'
+      responses:
+        '200':
+          description: Returns the new prompt object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: putPrompt
+      tags:
+      - Prompts
+      summary: Create or replace prompt
+      description: Create or replace a prompt. If a prompt with the same slug already exists in the project, it will be replaced.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePrompt'
+      responses:
+        '200':
+          description: Returns the prompt object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/prompt/{prompt_id}:
+    parameters:
+    - name: prompt_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getPromptId
+      tags:
+      - Prompts
+      summary: Get prompt
+      responses:
+        '200':
+          description: Returns the prompt object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchPromptId
+      tags:
+      - Prompts
+      summary: Partially update prompt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                prompt_data:
+                  $ref: '#/components/schemas/PromptData'
+                tags:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '200':
+          description: Returns the updated prompt object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deletePromptId
+      tags:
+      - Prompts
+      summary: Delete prompt
+      responses:
+        '200':
+          description: Returns the deleted prompt object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Prompt'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    PromptData:
+      type: object
+      description: The prompt template, model, and parameters.
+      properties:
+        prompt:
+          type: object
+          additionalProperties: true
+          description: The prompt block - chat messages or a completion template.
+        options:
+          type: object
+          additionalProperties: true
+          description: Model and parameter options (model, temperature, max_tokens, etc).
+        parser:
+          type: object
+          nullable: true
+          additionalProperties: true
+        tool_functions:
+          type: array
+          nullable: true
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    CreatePrompt:
+      type: object
+      required:
+      - project_id
+      - name
+      - slug
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        prompt_data:
+          $ref: '#/components/schemas/PromptData'
+        tags:
+          type: array
+          items:
+            type: string
+    Prompt:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+        prompt_data:
+          $ref: '#/components/schemas/PromptData'
+        tags:
+          type: array
+          nullable: true
+          items:
+            type: string
+        function_type:
+          type: string
+          nullable: true
+        log_id:
+          type: string
+          enum:
+          - p
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

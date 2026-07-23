@@ -1,0 +1,222 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL AI Proxy API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: AI Proxy
+paths:
+  /v1/proxy/chat/completions:
+    post:
+      operationId: proxychatCompletions
+      tags:
+      - AI Proxy
+      summary: Proxy chat/completions
+      description: OpenAI-compatible chat completions proxied to the configured model provider, with optional caching and automatic logging. Set stream to true for a Server-Sent Events response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatCompletionRequest'
+      responses:
+        '200':
+          description: Returns a chat completion, or an SSE stream when stream is true.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatCompletionResponse'
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events stream of chat completion chunks.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/proxy/embeddings:
+    post:
+      operationId: proxyembeddings
+      tags:
+      - AI Proxy
+      summary: Proxy embeddings
+      description: OpenAI-compatible embeddings proxied to the configured model provider.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - model
+              - input
+              properties:
+                model:
+                  type: string
+                input:
+                  oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type: string
+      responses:
+        '200':
+          description: Returns an embeddings response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  object:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: integer
+                        embedding:
+                          type: array
+                          items:
+                            type: number
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/proxy/credentials:
+    post:
+      operationId: proxycredentials
+      tags:
+      - AI Proxy
+      summary: Create temporary credential
+      description: Mint a temporary credential (JWT) scoped for use with the AI proxy, suitable for handing to browser or untrusted clients.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ttl_seconds:
+                  type: integer
+                  description: Time-to-live for the temporary credential, in seconds.
+                logging:
+                  type: object
+                  additionalProperties: true
+                model:
+                  type: string
+      responses:
+        '200':
+          description: Returns a temporary credential.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  key:
+                    type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      required:
+      - model
+      - messages
+      properties:
+        model:
+          type: string
+        messages:
+          type: array
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+                enum:
+                - system
+                - user
+                - assistant
+                - tool
+              content:
+                type: string
+        temperature:
+          type: number
+          nullable: true
+        max_tokens:
+          type: integer
+          nullable: true
+        stream:
+          type: boolean
+        tools:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                type: object
+                properties:
+                  role:
+                    type: string
+                  content:
+                    type: string
+                    nullable: true
+              finish_reason:
+                type: string
+                nullable: true
+        usage:
+          type: object
+          properties:
+            prompt_tokens:
+              type: integer
+            completion_tokens:
+              type: integer
+            total_tokens:
+              type: integer
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

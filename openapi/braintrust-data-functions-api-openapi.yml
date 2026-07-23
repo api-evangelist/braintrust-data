@@ -1,0 +1,352 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Functions API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Functions
+paths:
+  /v1/function:
+    get:
+      operationId: getFunction
+      tags:
+      - Functions
+      summary: List functions
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: project_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: function_name
+        in: query
+        schema:
+          type: string
+      - name: slug
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a list of functions.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postFunction
+      tags:
+      - Functions
+      summary: Create function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFunction'
+      responses:
+        '200':
+          description: Returns the new function object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: putFunction
+      tags:
+      - Functions
+      summary: Create or replace function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFunction'
+      responses:
+        '200':
+          description: Returns the function object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/function/{function_id}:
+    parameters:
+    - name: function_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getFunctionId
+      tags:
+      - Functions
+      summary: Get function
+      responses:
+        '200':
+          description: Returns the function object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchFunctionId
+      tags:
+      - Functions
+      summary: Partially update function
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                function_data:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Returns the updated function object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteFunctionId
+      tags:
+      - Functions
+      summary: Delete function
+      responses:
+        '200':
+          description: Returns the deleted function object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Function'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/function/{function_id}/invoke:
+    parameters:
+    - name: function_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    post:
+      operationId: postFunctionIdInvoke
+      tags:
+      - Functions
+      summary: Invoke function
+      description: Invoke a function (a prompt, code, or LLM scorer) server-side with the given input. Optionally stream the result and write a trace span to a parent object.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InvokeFunctionRequest'
+      responses:
+        '200':
+          description: Returns the function result, or an SSE stream when stream is true.
+          content:
+            application/json:
+              schema:
+                description: The return value of the function. Shape depends on the function.
+            text/event-stream:
+              schema:
+                type: string
+                description: Server-Sent Events stream of the function result when stream is true.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    PromptData:
+      type: object
+      description: The prompt template, model, and parameters.
+      properties:
+        prompt:
+          type: object
+          additionalProperties: true
+          description: The prompt block - chat messages or a completion template.
+        options:
+          type: object
+          additionalProperties: true
+          description: Model and parameter options (model, temperature, max_tokens, etc).
+        parser:
+          type: object
+          nullable: true
+          additionalProperties: true
+        tool_functions:
+          type: array
+          nullable: true
+          items:
+            type: object
+            additionalProperties: true
+    Function:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+        function_type:
+          type: string
+          nullable: true
+          enum:
+          - llm
+          - scorer
+          - task
+          - tool
+        function_data:
+          type: object
+          additionalProperties: true
+        prompt_data:
+          $ref: '#/components/schemas/PromptData'
+        function_schema:
+          type: object
+          nullable: true
+          additionalProperties: true
+        log_id:
+          type: string
+          enum:
+          - p
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    InvokeFunctionRequest:
+      type: object
+      properties:
+        input:
+          description: The input to the function. Shape depends on the function.
+        messages:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        parent:
+          description: Span parent properties; the result of the invocation will be logged as a span under this parent.
+          oneOf:
+          - type: string
+          - type: object
+            additionalProperties: true
+        stream:
+          type: boolean
+          description: If true, the response is returned as a Server-Sent Events stream.
+        version:
+          type: string
+          description: The version (transaction id) of the function to invoke.
+        mode:
+          type: string
+          enum:
+          - auto
+          - parallel
+    CreateFunction:
+      type: object
+      required:
+      - project_id
+      - name
+      - slug
+      - function_data
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        function_type:
+          type: string
+          enum:
+          - llm
+          - scorer
+          - task
+          - tool
+        function_data:
+          type: object
+          additionalProperties: true
+          description: The implementation - a prompt, inline code, a global function, or a reference to existing code.
+        prompt_data:
+          $ref: '#/components/schemas/PromptData'
+        function_schema:
+          type: object
+          additionalProperties: true
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

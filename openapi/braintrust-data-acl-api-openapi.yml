@@ -1,0 +1,409 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: ACL
+paths:
+  /v1/role:
+    get:
+      operationId: getRole
+      tags:
+      - ACL
+      summary: List roles
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: org_name
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a list of roles.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postRole
+      tags:
+      - ACL
+      summary: Create role
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                member_permissions:
+                  type: array
+                  items:
+                    type: object
+                    additionalProperties: true
+      responses:
+        '200':
+          description: Returns the new role object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Role'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/group:
+    get:
+      operationId: getGroup
+      tags:
+      - ACL
+      summary: List groups
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: org_name
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a list of groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Group'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postGroup
+      tags:
+      - ACL
+      summary: Create group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                member_users:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Returns the new group object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/acl:
+    get:
+      operationId: getAcl
+      tags:
+      - ACL
+      summary: List acls
+      description: List ACLs for a given object type and id.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: object_type
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: object_id
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns a list of ACLs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Acl'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postAcl
+      tags:
+      - ACL
+      summary: Create acl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAcl'
+      responses:
+        '200':
+          description: Returns the new ACL object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acl'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteAcl
+      tags:
+      - ACL
+      summary: Delete single acl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAcl'
+      responses:
+        '200':
+          description: Returns the deleted ACL object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Acl'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/acl/batch_update:
+    post:
+      operationId: aclBatchUpdate
+      tags:
+      - ACL
+      summary: Batch update acls
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                add_acls:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateAcl'
+                remove_acls:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/CreateAcl'
+      responses:
+        '200':
+          description: Returns the added and removed ACLs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  added_acls:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Acl'
+                  removed_acls:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Acl'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        org_id:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        member_permissions:
+          type: array
+          nullable: true
+          items:
+            type: object
+            additionalProperties: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        org_id:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        member_users:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+        member_groups:
+          type: array
+          nullable: true
+          items:
+            type: string
+            format: uuid
+        created:
+          type: string
+          format: date-time
+          nullable: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    CreateAcl:
+      type: object
+      required:
+      - object_type
+      - object_id
+      properties:
+        object_type:
+          type: string
+        object_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+        group_id:
+          type: string
+          format: uuid
+        permission:
+          type: string
+          enum:
+          - create
+          - read
+          - update
+          - delete
+          - create_acls
+          - read_acls
+          - update_acls
+          - delete_acls
+        role_id:
+          type: string
+          format: uuid
+        restrict_object_type:
+          type: string
+    Acl:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object_type:
+          type: string
+        object_id:
+          type: string
+          format: uuid
+        user_id:
+          type: string
+          format: uuid
+          nullable: true
+        group_id:
+          type: string
+          format: uuid
+          nullable: true
+        permission:
+          type: string
+          nullable: true
+          enum:
+          - create
+          - read
+          - update
+          - delete
+          - create_acls
+          - read_acls
+          - update_acls
+          - delete_acls
+        role_id:
+          type: string
+          format: uuid
+          nullable: true
+        restrict_object_type:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

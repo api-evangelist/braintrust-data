@@ -1,0 +1,323 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Project Configuration API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Project Configuration
+paths:
+  /v1/project_score:
+    get:
+      operationId: getProjectScore
+      tags:
+      - Project Configuration
+      summary: List project scores
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: project_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns a list of project scores.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProjectScore'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postProjectScore
+      tags:
+      - Project Configuration
+      summary: Create project_score
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectScore'
+      responses:
+        '200':
+          description: Returns the new project score object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectScore'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/project_score/{project_score_id}:
+    parameters:
+    - name: project_score_id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    get:
+      operationId: getProjectScoreId
+      tags:
+      - Project Configuration
+      summary: Get project_score
+      responses:
+        '200':
+          description: Returns the project score object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectScore'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteProjectScoreId
+      tags:
+      - Project Configuration
+      summary: Delete project_score
+      responses:
+        '200':
+          description: Returns the deleted project score object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectScore'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/project_tag:
+    get:
+      operationId: getProjectTag
+      tags:
+      - Project Configuration
+      summary: List project tags
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: project_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns a list of project tags.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProjectTag'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postProjectTag
+      tags:
+      - Project Configuration
+      summary: Create project_tag
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - project_id
+              - name
+              properties:
+                project_id:
+                  type: string
+                  format: uuid
+                name:
+                  type: string
+                description:
+                  type: string
+                color:
+                  type: string
+      responses:
+        '200':
+          description: Returns the new project tag object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectTag'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/view:
+    get:
+      operationId: getView
+      tags:
+      - Project Configuration
+      summary: List views
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: object_type
+        in: query
+        schema:
+          type: string
+      - name: object_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns a list of views.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/View'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ProjectScore:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        score_type:
+          type: string
+          enum:
+          - slider
+          - categorical
+          - weighted
+          - minimum
+          - maximum
+          - online
+        categories:
+          nullable: true
+          description: For categorical scores, the configured categories.
+        created:
+          type: string
+          format: date-time
+          nullable: true
+    View:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        object_type:
+          type: string
+        object_id:
+          type: string
+          format: uuid
+        view_type:
+          type: string
+          nullable: true
+        name:
+          type: string
+        view_data:
+          type: object
+          nullable: true
+          additionalProperties: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+    ProjectTag:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+    CreateProjectScore:
+      type: object
+      required:
+      - project_id
+      - name
+      - score_type
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        score_type:
+          type: string
+          enum:
+          - slider
+          - categorical
+          - weighted
+          - minimum
+          - maximum
+          - online
+        categories:
+          description: Category configuration for categorical scores.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

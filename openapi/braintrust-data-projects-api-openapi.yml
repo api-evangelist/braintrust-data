@@ -1,0 +1,239 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Projects API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Projects
+paths:
+  /v1/project:
+    get:
+      operationId: getProject
+      tags:
+      - Projects
+      summary: List projects
+      description: List out all projects, optionally filtered and paginated.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - name: org_name
+        in: query
+        schema:
+          type: string
+        description: Filter projects to a single organization by name.
+      - name: project_name
+        in: query
+        schema:
+          type: string
+        description: Filter to a project with the given name.
+      responses:
+        '200':
+          description: Returns a list of projects.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postProject
+      tags:
+      - Projects
+      summary: Create project
+      description: Create a new project. If there is an existing project with the same name in the organization, will return the existing project unmodified.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProject'
+      responses:
+        '200':
+          description: Returns the new project object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/project/{project_id}:
+    parameters:
+    - $ref: '#/components/parameters/ProjectId'
+    get:
+      operationId: getProjectId
+      tags:
+      - Projects
+      summary: Get project
+      description: Get a project by its unique identifier.
+      responses:
+        '200':
+          description: Returns the project object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchProjectId
+      tags:
+      - Projects
+      summary: Partially update project
+      description: Partially update a project object. Specify the fields to update in the payload. Unspecified fields are left unchanged.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProject'
+      responses:
+        '200':
+          description: Returns the updated project object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteProjectId
+      tags:
+      - Projects
+      summary: Delete project
+      description: Delete a project by its unique identifier.
+      responses:
+        '200':
+          description: Returns the deleted project object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Pagination cursor id. Together with limit, returns the previous page before the object with this id.
+      schema:
+        type: string
+        format: uuid
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: Project id, the unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Pagination cursor id. Together with limit, returns the next page after the object with this id.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        org_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        created:
+          type: string
+          format: date-time
+          nullable: true
+        deleted_at:
+          type: string
+          format: date-time
+          nullable: true
+        user_id:
+          type: string
+          format: uuid
+          nullable: true
+        settings:
+          type: object
+          nullable: true
+          additionalProperties: true
+    PatchProject:
+      type: object
+      properties:
+        name:
+          type: string
+        settings:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    CreateProject:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the project.
+        org_name:
+          type: string
+          description: For nearly all users, this parameter is unnecessary. Use it to disambiguate the organization when you belong to multiple.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

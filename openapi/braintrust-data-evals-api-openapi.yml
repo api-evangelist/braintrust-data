@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Evals API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Evals
+paths:
+  /v1/eval:
+    post:
+      operationId: evalLaunch
+      tags:
+      - Evals
+      summary: Launch an eval
+      description: Launch an evaluation. This is the API-equivalent of the Eval function in the SDK; it runs a task function over a dataset and applies scorers.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EvalLaunchRequest'
+      responses:
+        '200':
+          description: Returns a summary of the launched eval.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummarizeExperimentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    SummarizeExperimentResponse:
+      type: object
+      properties:
+        project_name:
+          type: string
+        experiment_name:
+          type: string
+        project_url:
+          type: string
+        experiment_url:
+          type: string
+        comparison_experiment_name:
+          type: string
+          nullable: true
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              score:
+                type: number
+              diff:
+                type: number
+                nullable: true
+              improvements:
+                type: integer
+              regressions:
+                type: integer
+        metrics:
+          type: object
+          nullable: true
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    EvalLaunchRequest:
+      type: object
+      required:
+      - project_id
+      - data
+      - task
+      - scores
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        experiment_name:
+          type: string
+        data:
+          description: A dataset id, dataset name, or inline dataset definition to evaluate over.
+          oneOf:
+          - type: object
+            additionalProperties: true
+          - type: string
+        task:
+          description: A function id or slug naming the task function to run over each input.
+          oneOf:
+          - type: object
+            additionalProperties: true
+          - type: string
+        scores:
+          type: array
+          description: A list of scoring functions (by id, slug, or inline) to apply.
+          items:
+            oneOf:
+            - type: object
+              additionalProperties: true
+            - type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        stream:
+          type: boolean
+  responses:
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Logs API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Logs
+paths:
+  /v1/project_logs/{project_id}/insert:
+    parameters:
+    - $ref: '#/components/parameters/ProjectId'
+    post:
+      operationId: postProjectLogsIdInsert
+      tags:
+      - Logs
+      summary: Insert project logs events
+      description: Insert a set of trace span / log events into a project's logs.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - events
+              properties:
+                events:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/InsertEvent'
+      responses:
+        '200':
+          description: Returns the row ids of the inserted events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/project_logs/{project_id}/fetch:
+    parameters:
+    - $ref: '#/components/parameters/ProjectId'
+    post:
+      operationId: postProjectLogsIdFetch
+      tags:
+      - Logs
+      summary: Fetch project logs (POST form)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchEventsRequest'
+      responses:
+        '200':
+          description: Returns the fetched log events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: getProjectLogsIdFetch
+      tags:
+      - Logs
+      summary: Fetch project logs (GET form)
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      responses:
+        '200':
+          description: Returns the fetched log events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/project_logs/{project_id}/feedback:
+    parameters:
+    - $ref: '#/components/parameters/ProjectId'
+    post:
+      operationId: postProjectLogsIdFeedback
+      tags:
+      - Logs
+      summary: Feedback for project logs events
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - feedback
+              properties:
+                feedback:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FeedbackItem'
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    InsertEvent:
+      type: object
+      description: A single event (trace span, experiment row, or dataset record). Events are merged/upserted by id.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the event. If omitted, one is generated.
+        input:
+          description: The arguments that uniquely define a test case or trace input.
+        output:
+          description: The output of your application for the given input.
+        expected:
+          description: The ground-truth value to compare against.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            nullable: true
+          description: A map of score names to score values between 0 and 1.
+        metadata:
+          type: object
+          additionalProperties: true
+        tags:
+          type: array
+          items:
+            type: string
+        metrics:
+          type: object
+          additionalProperties: true
+        span_attributes:
+          type: object
+          additionalProperties: true
+        _is_merge:
+          type: boolean
+          description: If true, this event is merged into an existing event with the same id.
+    FeedbackItem:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: The id of the event to provide feedback for.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            nullable: true
+        expected:
+          description: The ground truth value the event should have produced.
+        comment:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        source:
+          type: string
+          enum:
+          - app
+          - api
+          - external
+    FetchEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        cursor:
+          type: string
+          nullable: true
+          description: A pagination cursor to pass to fetch the next page of events.
+    FetchEventsRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of events to return.
+        max_xact_id:
+          type: string
+          description: Pagination cursor - the maximum transaction id from a previous page.
+        max_root_span_id:
+          type: string
+          description: Pagination cursor - the maximum root span id from a previous page.
+        version:
+          type: string
+        filters:
+          type: array
+          description: A list of filters to apply, using path-lookup style.
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          description: The ids of all rows that were inserted, aligning with the input order.
+          items:
+            type: string
+  responses:
+    Empty:
+      description: Success.
+      content:
+        application/json:
+          schema:
+            type: object
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+    ProjectId:
+      name: project_id
+      in: path
+      required: true
+      description: Project id, the unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'

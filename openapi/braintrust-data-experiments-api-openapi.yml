@@ -1,0 +1,535 @@
+openapi: 3.0.3
+info:
+  title: Braintrust REST ACL Experiments API
+  description: The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.
+  termsOfService: https://www.braintrust.dev/legal/terms-of-service
+  contact:
+    name: Braintrust Support
+    email: support@braintrust.dev
+    url: https://www.braintrust.dev/docs
+  version: '1.0'
+servers:
+- url: https://api.braintrust.dev
+  description: US data plane (default)
+- url: https://api-eu.braintrust.dev
+  description: EU data plane
+security:
+- bearerAuth: []
+tags:
+- name: Experiments
+paths:
+  /v1/experiment:
+    get:
+      operationId: getExperiment
+      tags:
+      - Experiments
+      summary: List experiments
+      description: List out all experiments, optionally filtered and paginated.
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - $ref: '#/components/parameters/StartingAfter'
+      - $ref: '#/components/parameters/EndingBefore'
+      - name: project_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+        description: Filter experiments to a project.
+      - name: experiment_name
+        in: query
+        schema:
+          type: string
+        description: Filter to an experiment with the given name.
+      responses:
+        '200':
+          description: Returns a list of experiments.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Experiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: postExperiment
+      tags:
+      - Experiments
+      summary: Create experiment
+      description: Create a new experiment. If there is an existing experiment with the same name as the one specified in the request, will return the existing experiment unmodified.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateExperiment'
+      responses:
+        '200':
+          description: Returns the new experiment object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/experiment/{experiment_id}:
+    parameters:
+    - $ref: '#/components/parameters/ExperimentId'
+    get:
+      operationId: getExperimentId
+      tags:
+      - Experiments
+      summary: Get experiment
+      responses:
+        '200':
+          description: Returns the experiment object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchExperimentId
+      tags:
+      - Experiments
+      summary: Partially update experiment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+                metadata:
+                  type: object
+                  additionalProperties: true
+      responses:
+        '200':
+          description: Returns the updated experiment object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: deleteExperimentId
+      tags:
+      - Experiments
+      summary: Delete experiment
+      responses:
+        '200':
+          description: Returns the deleted experiment object.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Experiment'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/experiment/{experiment_id}/insert:
+    parameters:
+    - $ref: '#/components/parameters/ExperimentId'
+    post:
+      operationId: postExperimentIdInsert
+      tags:
+      - Experiments
+      summary: Insert experiment events
+      description: Insert a set of events into the experiment. Events are upserted by id; equivalent to the SDK's logging interface.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - events
+              properties:
+                events:
+                  type: array
+                  description: A list of experiment events to insert.
+                  items:
+                    $ref: '#/components/schemas/InsertEvent'
+      responses:
+        '200':
+          description: Returns the row ids of the inserted events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InsertEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/experiment/{experiment_id}/fetch:
+    parameters:
+    - $ref: '#/components/parameters/ExperimentId'
+    post:
+      operationId: postExperimentIdFetch
+      tags:
+      - Experiments
+      summary: Fetch experiment (POST form)
+      description: Fetch the events in an experiment. Use the POST form to express complex filters, limits, and cursors in the request body.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FetchEventsRequest'
+      responses:
+        '200':
+          description: Returns the fetched events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    get:
+      operationId: getExperimentIdFetch
+      tags:
+      - Experiments
+      summary: Fetch experiment (GET form)
+      parameters:
+      - $ref: '#/components/parameters/Limit'
+      - name: max_xact_id
+        in: query
+        schema:
+          type: string
+      - name: max_root_span_id
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns the fetched events.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FetchEventsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/experiment/{experiment_id}/feedback:
+    parameters:
+    - $ref: '#/components/parameters/ExperimentId'
+    post:
+      operationId: postExperimentIdFeedback
+      tags:
+      - Experiments
+      summary: Feedback for experiment events
+      description: Log feedback for a set of experiment events.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - feedback
+              properties:
+                feedback:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FeedbackItem'
+      responses:
+        '200':
+          $ref: '#/components/responses/Empty'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /v1/experiment/{experiment_id}/summarize:
+    parameters:
+    - $ref: '#/components/parameters/ExperimentId'
+    get:
+      operationId: getExperimentIdSummarize
+      tags:
+      - Experiments
+      summary: Summarize experiment
+      description: Summarize the scores and metrics of an experiment.
+      parameters:
+      - name: summarize_scores
+        in: query
+        schema:
+          type: boolean
+      - name: comparison_experiment_id
+        in: query
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Returns the experiment summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummarizeExperimentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    InsertEvent:
+      type: object
+      description: A single event (trace span, experiment row, or dataset record). Events are merged/upserted by id.
+      properties:
+        id:
+          type: string
+          description: A unique identifier for the event. If omitted, one is generated.
+        input:
+          description: The arguments that uniquely define a test case or trace input.
+        output:
+          description: The output of your application for the given input.
+        expected:
+          description: The ground-truth value to compare against.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            nullable: true
+          description: A map of score names to score values between 0 and 1.
+        metadata:
+          type: object
+          additionalProperties: true
+        tags:
+          type: array
+          items:
+            type: string
+        metrics:
+          type: object
+          additionalProperties: true
+        span_attributes:
+          type: object
+          additionalProperties: true
+        _is_merge:
+          type: boolean
+          description: If true, this event is merged into an existing event with the same id.
+    Experiment:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        created:
+          type: string
+          format: date-time
+          nullable: true
+        repo_info:
+          type: object
+          nullable: true
+          additionalProperties: true
+        base_exp_id:
+          type: string
+          format: uuid
+          nullable: true
+        dataset_id:
+          type: string
+          format: uuid
+          nullable: true
+        public:
+          type: boolean
+        metadata:
+          type: object
+          nullable: true
+          additionalProperties: true
+    FeedbackItem:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: string
+          description: The id of the event to provide feedback for.
+        scores:
+          type: object
+          additionalProperties:
+            type: number
+            nullable: true
+        expected:
+          description: The ground truth value the event should have produced.
+        comment:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+        source:
+          type: string
+          enum:
+          - app
+          - api
+          - external
+    FetchEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        cursor:
+          type: string
+          nullable: true
+          description: A pagination cursor to pass to fetch the next page of events.
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: A human-readable error message.
+    FetchEventsRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of events to return.
+        max_xact_id:
+          type: string
+          description: Pagination cursor - the maximum transaction id from a previous page.
+        max_root_span_id:
+          type: string
+          description: Pagination cursor - the maximum root span id from a previous page.
+        version:
+          type: string
+        filters:
+          type: array
+          description: A list of filters to apply, using path-lookup style.
+          items:
+            type: object
+            additionalProperties: true
+    SummarizeExperimentResponse:
+      type: object
+      properties:
+        project_name:
+          type: string
+        experiment_name:
+          type: string
+        project_url:
+          type: string
+        experiment_url:
+          type: string
+        comparison_experiment_name:
+          type: string
+          nullable: true
+        scores:
+          type: object
+          nullable: true
+          additionalProperties:
+            type: object
+            properties:
+              name:
+                type: string
+              score:
+                type: number
+              diff:
+                type: number
+                nullable: true
+              improvements:
+                type: integer
+              regressions:
+                type: integer
+        metrics:
+          type: object
+          nullable: true
+          additionalProperties: true
+    InsertEventsResponse:
+      type: object
+      properties:
+        row_ids:
+          type: array
+          description: The ids of all rows that were inserted, aligning with the input order.
+          items:
+            type: string
+    CreateExperiment:
+      type: object
+      required:
+      - project_id
+      properties:
+        project_id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        base_exp_id:
+          type: string
+          format: uuid
+        dataset_id:
+          type: string
+          format: uuid
+        dataset_version:
+          type: string
+        public:
+          type: boolean
+        metadata:
+          type: object
+          additionalProperties: true
+        repo_info:
+          type: object
+          additionalProperties: true
+  parameters:
+    EndingBefore:
+      name: ending_before
+      in: query
+      description: Pagination cursor id. Together with limit, returns the previous page before the object with this id.
+      schema:
+        type: string
+        format: uuid
+    Limit:
+      name: limit
+      in: query
+      description: Limit the number of objects to return.
+      schema:
+        type: integer
+        minimum: 0
+    ExperimentId:
+      name: experiment_id
+      in: path
+      required: true
+      description: Experiment id, the unique identifier of the experiment.
+      schema:
+        type: string
+        format: uuid
+    StartingAfter:
+      name: starting_after
+      in: query
+      description: Pagination cursor id. Together with limit, returns the next page after the object with this id.
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Empty:
+      description: Success.
+      content:
+        application/json:
+          schema:
+            type: object
+    Unauthorized:
+      description: Authentication failed - missing or invalid API key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key or JWT
+      description: 'Authenticate requests with your Braintrust API key in the Authorization header, e.g. `Authorization: Bearer $BRAINTRUST_API_KEY`.'
