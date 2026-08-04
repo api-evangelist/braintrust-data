@@ -1,0 +1,36 @@
+{
+  "provider": "braintrust-data",
+  "sources": [
+    "braintrust-data-acl-api-openapi.yml",
+    "braintrust-data-ai-proxy-api-openapi.yml",
+    "braintrust-data-credentials-api-openapi.yml",
+    "braintrust-data-datasets-api-openapi.yml",
+    "braintrust-data-evals-api-openapi.yml",
+    "braintrust-data-experiments-api-openapi.yml",
+    "braintrust-data-functions-api-openapi.yml",
+    "braintrust-data-logs-api-openapi.yml",
+    "braintrust-data-organization-api-openapi.yml",
+    "braintrust-data-project-configuration-api-openapi.yml",
+    "braintrust-data-projects-api-openapi.yml",
+    "braintrust-data-prompts-api-openapi.yml"
+  ],
+  "outputs": [
+    "braintrust-data-acl-api-openapi.yml",
+    "braintrust-data-ai-proxy-api-openapi.yml",
+    "braintrust-data-credentials-api-openapi.yml",
+    "braintrust-data-datasets-api-openapi.yml",
+    "braintrust-data-evals-api-openapi.yml",
+    "braintrust-data-experiments-api-openapi.yml",
+    "braintrust-data-functions-api-openapi.yml",
+    "braintrust-data-logs-api-openapi.yml",
+    "braintrust-data-organization-api-openapi.yml",
+    "braintrust-data-project-configuration-api-openapi.yml",
+    "braintrust-data-projects-api-openapi.yml",
+    "braintrust-data-prompts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
