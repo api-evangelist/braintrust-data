@@ -1,0 +1,1047 @@
+{
+  "item": [
+    {
+      "id": "f7c723a8-5930-48a7-bf31-3f1fb33c29ce",
+      "name": "Prompts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "25c15ad2-d834-43a1-9606-67c49677f1f8",
+          "name": "List prompts",
+          "request": {
+            "name": "List prompts",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prompt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "prompt_name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "slug",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c769ab94-d6a4-4052-a35b-180ef3466e4d",
+              "name": "Returns a list of prompts.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "prompt_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"39702e47-499b-ea46-53a2-6aec4f8463a7\",\n      \"project_id\": \"95ef8022-7555-0c72-d7d3-201158162d0c\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"description\": \"string\",\n      \"created\": \"1973-11-22T05:07:38.344Z\",\n      \"prompt_data\": {\n        \"prompt\": {\n          \"key_0\": true,\n          \"key_1\": \"string\",\n          \"key_2\": true,\n          \"key_3\": 268.4498835198901,\n          \"key_4\": false\n        },\n        \"options\": {\n          \"key_0\": 2069,\n          \"key_1\": 8950\n        },\n        \"parser\": {\n          \"key_0\": \"string\",\n          \"key_1\": 9098,\n          \"key_2\": \"string\"\n        },\n        \"tool_functions\": [\n          {\n            \"key_0\": 4580\n          },\n          {\n            \"key_0\": 5930,\n            \"key_1\": 244.17412224935765,\n            \"key_2\": 9643\n          }\n        ]\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"function_type\": \"string\",\n      \"log_id\": \"p\"\n    },\n    {\n      \"id\": \"8b540e1b-3c8e-6c2f-2863-242777605308\",\n      \"project_id\": \"62286d45-0a12-4836-c2a7-0849115192b4\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"description\": \"string\",\n      \"created\": \"2025-03-06T12:46:13.454Z\",\n      \"prompt_data\": {\n        \"prompt\": {\n          \"key_0\": false,\n          \"key_1\": \"string\"\n        },\n        \"options\": {\n          \"key_0\": 1563,\n          \"key_1\": \"string\"\n        },\n        \"parser\": {\n          \"key_0\": 8299.580521238282,\n          \"key_1\": 9775\n        },\n        \"tool_functions\": [\n          {\n            \"key_0\": \"string\"\n          },\n          {\n            \"key_0\": \"string\"\n          }\n        ]\n      },\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"function_type\": \"string\",\n      \"log_id\": \"p\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0065e08d-63ea-4241-8753-d7ac710d077a",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "prompt_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "slug",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aeaa4521-a6e0-4e0c-974e-4e0f4da04145",
+          "name": "Create prompt",
+          "request": {
+            "name": "Create prompt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prompt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": \"string\",\n      \"key_1\": 8853.969173962556\n    },\n    \"options\": {\n      \"key_0\": 771,\n      \"key_1\": true\n    },\n    \"parser\": {\n      \"key_0\": 9276.383394609751\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": false,\n        \"key_1\": 2811.012582446305\n      },\n      {\n        \"key_0\": true,\n        \"key_1\": 3566\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "181e3612-fa73-433c-ae85-1cbeb023c104",
+              "name": "Returns the new prompt object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 8127,\n      \"key_1\": 9427\n    },\n    \"options\": {\n      \"key_0\": 2540.8059875687195\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 649.6358690591242\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": 8793.047013579162\n      },\n      {\n        \"key_0\": 8374,\n        \"key_1\": 8555.864167213495\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3334c004-922b-cb33-191c-a0fcf73c6114\",\n  \"project_id\": \"4ed1b0b4-f586-c3b3-15e0-4c32848f76c4\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"2013-10-31T05:25:27.020Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 9213\n    },\n    \"parser\": {\n      \"key_0\": 8310.979645466941,\n      \"key_1\": 2906,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"function_type\": \"string\",\n  \"log_id\": \"p\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a0fd302-d549-4117-afdc-4747915c9c05",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 8127,\n      \"key_1\": 9427\n    },\n    \"options\": {\n      \"key_0\": 2540.8059875687195\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 649.6358690591242\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": 8793.047013579162\n      },\n      {\n        \"key_0\": 8374,\n        \"key_1\": 8555.864167213495\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c566656-9ffd-4d80-bb9b-64034fadf5a2",
+          "name": "Create or replace prompt",
+          "request": {
+            "name": "Create or replace prompt",
+            "description": {
+              "content": "Create or replace a prompt. If a prompt with the same slug already exists in the project, it will be replaced.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "prompt"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": \"string\",\n      \"key_1\": 3786.145706928391,\n      \"key_2\": 2977\n    },\n    \"options\": {\n      \"key_0\": true,\n      \"key_1\": true,\n      \"key_2\": false\n    },\n    \"parser\": {\n      \"key_0\": 841.4355832538666\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": 3508.966627091471\n      },\n      {\n        \"key_0\": 2942.1770539961544\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a98c3562-f8fa-4164-a2fd-bd334a7095e6",
+              "name": "Returns the prompt object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 8127,\n      \"key_1\": 9427\n    },\n    \"options\": {\n      \"key_0\": 2540.8059875687195\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 649.6358690591242\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": 8793.047013579162\n      },\n      {\n        \"key_0\": 8374,\n        \"key_1\": 8555.864167213495\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3334c004-922b-cb33-191c-a0fcf73c6114\",\n  \"project_id\": \"4ed1b0b4-f586-c3b3-15e0-4c32848f76c4\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"2013-10-31T05:25:27.020Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 9213\n    },\n    \"parser\": {\n      \"key_0\": 8310.979645466941,\n      \"key_1\": 2906,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"function_type\": \"string\",\n  \"log_id\": \"p\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e903bbb-8936-4683-9558-3723b0daecab",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"slug\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 8127,\n      \"key_1\": 9427\n    },\n    \"options\": {\n      \"key_0\": 2540.8059875687195\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false,\n      \"key_2\": 649.6358690591242\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": 8793.047013579162\n      },\n      {\n        \"key_0\": 8374,\n        \"key_1\": 8555.864167213495\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cf2d308-be88-46b2-aac0-4dba9e6aa217",
+          "name": "Get prompt",
+          "request": {
+            "name": "Get prompt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prompt",
+                ":prompt_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "prompt_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cc8a3c1e-81af-4d63-91f4-5d63f50857ab",
+              "name": "Returns the prompt object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3334c004-922b-cb33-191c-a0fcf73c6114\",\n  \"project_id\": \"4ed1b0b4-f586-c3b3-15e0-4c32848f76c4\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"2013-10-31T05:25:27.020Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 9213\n    },\n    \"parser\": {\n      \"key_0\": 8310.979645466941,\n      \"key_1\": 2906,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"function_type\": \"string\",\n  \"log_id\": \"p\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "885e0825-a597-4070-a10d-7b3daf790132",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d0b782f-4806-4950-a205-7633404fdf30",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2805c10-0dd7-425a-86de-3a53497e1632",
+          "name": "Partially update prompt",
+          "request": {
+            "name": "Partially update prompt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prompt",
+                ":prompt_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "prompt_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 2761.8203647080963,\n      \"key_1\": \"string\"\n    },\n    \"options\": {\n      \"key_0\": 1935.2098723783618\n    },\n    \"parser\": {\n      \"key_0\": \"string\"\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": 8387.549034729776\n      },\n      {\n        \"key_0\": 3115.448279822135,\n        \"key_1\": true,\n        \"key_2\": 4115.753790055749,\n        \"key_3\": 8917\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5fe78274-8f23-42a8-a776-3cfad93702d4",
+              "name": "Returns the updated prompt object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 7010.780576905386,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": false\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"key_0\": 7643,\n        \"key_1\": 4820.588028803516,\n        \"key_2\": \"string\",\n        \"key_3\": 4255.413745774951,\n        \"key_4\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3334c004-922b-cb33-191c-a0fcf73c6114\",\n  \"project_id\": \"4ed1b0b4-f586-c3b3-15e0-4c32848f76c4\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"2013-10-31T05:25:27.020Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 9213\n    },\n    \"parser\": {\n      \"key_0\": 8310.979645466941,\n      \"key_1\": 2906,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"function_type\": \"string\",\n  \"log_id\": \"p\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ae4880c-e666-4ec2-9765-d5a94fc97dc5",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": 7010.780576905386,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": false\n    },\n    \"parser\": {\n      \"key_0\": \"string\",\n      \"key_1\": false\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": \"string\",\n        \"key_1\": false\n      },\n      {\n        \"key_0\": 7643,\n        \"key_1\": 4820.588028803516,\n        \"key_2\": \"string\",\n        \"key_3\": 4255.413745774951,\n        \"key_4\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f050504f-c26a-4e23-aab3-44bdcd07a84b",
+          "name": "Delete prompt",
+          "request": {
+            "name": "Delete prompt",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "prompt",
+                ":prompt_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "prompt_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c83daf6b-c5b5-4df2-897c-0dc38706fc06",
+              "name": "Returns the deleted prompt object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3334c004-922b-cb33-191c-a0fcf73c6114\",\n  \"project_id\": \"4ed1b0b4-f586-c3b3-15e0-4c32848f76c4\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"2013-10-31T05:25:27.020Z\",\n  \"prompt_data\": {\n    \"prompt\": {\n      \"key_0\": false,\n      \"key_1\": true\n    },\n    \"options\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": 9213\n    },\n    \"parser\": {\n      \"key_0\": 8310.979645466941,\n      \"key_1\": 2906,\n      \"key_2\": true,\n      \"key_3\": true\n    },\n    \"tool_functions\": [\n      {\n        \"key_0\": true,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      {\n        \"key_0\": \"string\"\n      }\n    ]\n  },\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ],\n  \"function_type\": \"string\",\n  \"log_id\": \"p\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35bf9335-7aac-4f8a-ae79-48e44ec11b86",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "prompt",
+                    ":prompt_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "prompt_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e0639e18-bb46-4eb1-b0c1-61f8f3d4e39f",
+    "name": "Braintrust REST ACL Prompts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.\n\nContact Support:\n Name: Braintrust Support\n Email: support@braintrust.dev",
+      "type": "text/plain"
+    }
+  }
+}

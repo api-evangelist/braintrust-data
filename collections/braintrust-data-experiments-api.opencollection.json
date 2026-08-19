@@ -1,0 +1,276 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Braintrust REST ACL Experiments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Experiments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List experiments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/experiment",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return."
+              },
+              {
+                "name": "starting_after",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id. Together with limit, returns the next page after the object with this id."
+              },
+              {
+                "name": "ending_before",
+                "value": "",
+                "type": "query",
+                "description": "Pagination cursor id. Together with limit, returns the previous page before the object with this id."
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter experiments to a project."
+              },
+              {
+                "name": "experiment_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter to an experiment with the given name."
+              }
+            ]
+          },
+          "docs": "List out all experiments, optionally filtered and paginated."
+        },
+        {
+          "info": {
+            "name": "Create experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new experiment. If there is an existing experiment with the same name as the one specified in the request, will return the existing experiment unmodified."
+        },
+        {
+          "info": {
+            "name": "Get experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ]
+          },
+          "docs": "Get experiment"
+        },
+        {
+          "info": {
+            "name": "Partially update experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Partially update experiment"
+        },
+        {
+          "info": {
+            "name": "Delete experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ]
+          },
+          "docs": "Delete experiment"
+        },
+        {
+          "info": {
+            "name": "Insert experiment events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/insert",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Insert a set of events into the experiment. Events are upserted by id; equivalent to the SDK's logging interface."
+        },
+        {
+          "info": {
+            "name": "Fetch experiment (GET form)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/fetch",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of objects to return."
+              },
+              {
+                "name": "max_xact_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "max_root_span_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetch experiment (GET form)"
+        },
+        {
+          "info": {
+            "name": "Fetch experiment (POST form)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/fetch",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Fetch the events in an experiment. Use the POST form to express complex filters, limits, and cursors in the request body."
+        },
+        {
+          "info": {
+            "name": "Feedback for experiment events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/feedback",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Log feedback for a set of experiment events."
+        },
+        {
+          "info": {
+            "name": "Summarize experiment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.braintrust.dev/v1/experiment/:experiment_id/summarize",
+            "params": [
+              {
+                "name": "experiment_id",
+                "value": "",
+                "type": "path",
+                "description": "Experiment id, the unique identifier of the experiment."
+              },
+              {
+                "name": "summarize_scores",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "comparison_experiment_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Summarize the scores and metrics of an experiment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

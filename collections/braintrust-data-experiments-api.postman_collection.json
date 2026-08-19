@@ -1,0 +1,1843 @@
+{
+  "item": [
+    {
+      "id": "282f3232-4f78-40ce-8911-89541686e566",
+      "name": "Experiments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ebcdc6e7-add5-4130-a3ea-1ff79a3467e7",
+          "name": "List experiments",
+          "request": {
+            "name": "List experiments",
+            "description": {
+              "content": "List out all experiments, optionally filtered and paginated.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "starting_after",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id. Together with limit, returns the next page after the object with this id."
+                },
+                {
+                  "disabled": false,
+                  "key": "ending_before",
+                  "value": "<uuid>",
+                  "description": "Pagination cursor id. Together with limit, returns the previous page before the object with this id."
+                },
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<uuid>",
+                  "description": "Filter experiments to a project."
+                },
+                {
+                  "disabled": false,
+                  "key": "experiment_name",
+                  "value": "<string>",
+                  "description": "Filter to an experiment with the given name."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e5a416b-4b67-4ccd-9188-f2084f3240e9",
+              "name": "Returns a list of experiments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "experiment_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"f602589d-ab53-8c28-8b40-473340911d56\",\n      \"project_id\": \"1081c355-5d09-bb86-38e0-ea5afdecc88a\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"created\": \"2025-03-04T06:10:36.914Z\",\n      \"repo_info\": {\n        \"key_0\": 3001,\n        \"key_1\": \"string\",\n        \"key_2\": true\n      },\n      \"base_exp_id\": \"75b3b432-dfef-c69d-8ded-2e2a81c09811\",\n      \"dataset_id\": \"89661f36-64a0-b8bf-818c-a39178cb152b\",\n      \"public\": true,\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    },\n    {\n      \"id\": \"e11c57fd-3932-088a-274d-15965675eba1\",\n      \"project_id\": \"20a51860-a05a-e970-d792-b14f6ddd0b20\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"created\": \"1999-09-14T20:20:07.086Z\",\n      \"repo_info\": {\n        \"key_0\": true\n      },\n      \"base_exp_id\": \"9c833b18-e455-f03b-7ac5-75fb3503138d\",\n      \"dataset_id\": \"abefe15c-ed1f-5d07-9ede-5f8e3efe2747\",\n      \"public\": false,\n      \"metadata\": {\n        \"key_0\": true,\n        \"key_1\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38fde5ef-5951-4893-ab1b-0b836fe579cb",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "starting_after",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "ending_before",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "project_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "experiment_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0304b631-1593-4af2-a5ee-185a9bc42c99",
+          "name": "Create experiment",
+          "request": {
+            "name": "Create experiment",
+            "description": {
+              "content": "Create a new experiment. If there is an existing experiment with the same name as the one specified in the request, will return the existing experiment unmodified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"base_exp_id\": \"<uuid>\",\n  \"dataset_id\": \"<uuid>\",\n  \"dataset_version\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"metadata\": {\n    \"key_0\": 9203.448906597852,\n    \"key_1\": 760.5272921828265\n  },\n  \"repo_info\": {\n    \"key_0\": 9995,\n    \"key_1\": 3753.2541584167934,\n    \"key_2\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e2b40e5b-70b4-4a09-81a9-30ab4da3c9cd",
+              "name": "Returns the new experiment object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"base_exp_id\": \"<uuid>\",\n  \"dataset_id\": \"<uuid>\",\n  \"dataset_version\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"metadata\": {\n    \"key_0\": 8284.65008766647,\n    \"key_1\": 4383.760851522496,\n    \"key_2\": 7893.9656549102865,\n    \"key_3\": true\n  },\n  \"repo_info\": {\n    \"key_0\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"214ae515-f87b-1e4f-2dbd-7b36678bbf6f\",\n  \"project_id\": \"561f1c24-e1ff-682c-40fb-4c9bff7207df\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"1988-05-25T03:40:35.766Z\",\n  \"repo_info\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"base_exp_id\": \"f937c99b-1eda-ca5b-abaa-d03f4b288379\",\n  \"dataset_id\": \"3aebce17-c737-4803-6d3c-707fba5f0fe6\",\n  \"public\": false,\n  \"metadata\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8caf599-6eba-4477-9e1e-eedc00ef366e",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"base_exp_id\": \"<uuid>\",\n  \"dataset_id\": \"<uuid>\",\n  \"dataset_version\": \"<string>\",\n  \"public\": \"<boolean>\",\n  \"metadata\": {\n    \"key_0\": 8284.65008766647,\n    \"key_1\": 4383.760851522496,\n    \"key_2\": 7893.9656549102865,\n    \"key_3\": true\n  },\n  \"repo_info\": {\n    \"key_0\": true\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "653dcc6e-f697-404a-87b5-d2d4f411851b",
+          "name": "Get experiment",
+          "request": {
+            "name": "Get experiment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ea5190a-4249-490c-89fd-dfc0ad67fef0",
+              "name": "Returns the experiment object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"214ae515-f87b-1e4f-2dbd-7b36678bbf6f\",\n  \"project_id\": \"561f1c24-e1ff-682c-40fb-4c9bff7207df\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"1988-05-25T03:40:35.766Z\",\n  \"repo_info\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"base_exp_id\": \"f937c99b-1eda-ca5b-abaa-d03f4b288379\",\n  \"dataset_id\": \"3aebce17-c737-4803-6d3c-707fba5f0fe6\",\n  \"public\": false,\n  \"metadata\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbfb2600-c144-4a97-b900-84f7ea943a63",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a11c372-05b2-4431-83f6-8729ec9fb875",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "061e77b9-77e2-4bd0-9e64-6468016444e3",
+          "name": "Partially update experiment",
+          "request": {
+            "name": "Partially update experiment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 3841,\n    \"key_1\": 9515.935120354361,\n    \"key_2\": true,\n    \"key_3\": true\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af3aa091-1a91-418e-b904-3bf95746824d",
+              "name": "Returns the updated experiment object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 9727.49147212574,\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"214ae515-f87b-1e4f-2dbd-7b36678bbf6f\",\n  \"project_id\": \"561f1c24-e1ff-682c-40fb-4c9bff7207df\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"1988-05-25T03:40:35.766Z\",\n  \"repo_info\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"base_exp_id\": \"f937c99b-1eda-ca5b-abaa-d03f4b288379\",\n  \"dataset_id\": \"3aebce17-c737-4803-6d3c-707fba5f0fe6\",\n  \"public\": false,\n  \"metadata\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ce80e52-f408-49c3-9504-8ef25ee42c9a",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 9727.49147212574,\n    \"key_1\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "255d4e28-2901-4b94-bcbc-a7faaa92cf0a",
+          "name": "Delete experiment",
+          "request": {
+            "name": "Delete experiment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b3b78f70-408b-461a-b58e-222266a88c82",
+              "name": "Returns the deleted experiment object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"214ae515-f87b-1e4f-2dbd-7b36678bbf6f\",\n  \"project_id\": \"561f1c24-e1ff-682c-40fb-4c9bff7207df\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"created\": \"1988-05-25T03:40:35.766Z\",\n  \"repo_info\": {\n    \"key_0\": true,\n    \"key_1\": \"string\"\n  },\n  \"base_exp_id\": \"f937c99b-1eda-ca5b-abaa-d03f4b288379\",\n  \"dataset_id\": \"3aebce17-c737-4803-6d3c-707fba5f0fe6\",\n  \"public\": false,\n  \"metadata\": {\n    \"key_0\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcfbac40-6dbe-4ac1-96b5-e02631602fca",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de28ed91-77a5-4ac6-8902-5f213c818770",
+          "name": "Insert experiment events",
+          "request": {
+            "name": "Insert experiment events",
+            "description": {
+              "content": "Insert a set of events into the experiment. Events are upserted by id; equivalent to the SDK's logging interface.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id",
+                "insert"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": 7761.797952084546\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": false\n      },\n      \"span_attributes\": {\n        \"key_0\": false,\n        \"key_1\": 368\n      },\n      \"_is_merge\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9891.098642433113,\n        \"key_1\": 4491.489096884517\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": 6043.051280220919\n      },\n      \"span_attributes\": {\n        \"key_0\": \"string\",\n        \"key_1\": 9708.999989794063\n      },\n      \"_is_merge\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f16602a3-c596-4e97-a05e-4b4a4f5279dd",
+              "name": "Returns the row ids of the inserted events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "insert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9100,\n        \"key_1\": 4083.3543373670523\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": true\n      },\n      \"span_attributes\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"_is_merge\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": 1500.6799024135996\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": 4062\n      },\n      \"span_attributes\": {\n        \"key_0\": true\n      },\n      \"_is_merge\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"row_ids\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0aa7680-417d-45a9-af51-8d80adc15290",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "insert"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": 9100,\n        \"key_1\": 4083.3543373670523\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": true\n      },\n      \"span_attributes\": {\n        \"key_0\": false,\n        \"key_1\": true\n      },\n      \"_is_merge\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"input\": {},\n      \"output\": {},\n      \"expected\": {},\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": 1500.6799024135996\n      },\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"metrics\": {\n        \"key_0\": 4062\n      },\n      \"span_attributes\": {\n        \"key_0\": true\n      },\n      \"_is_merge\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3011fe80-98c4-4cc9-ab6e-14588301c96a",
+          "name": "Fetch experiment (POST form)",
+          "request": {
+            "name": "Fetch experiment (POST form)",
+            "description": {
+              "content": "Fetch the events in an experiment. Use the POST form to express complex filters, limits, and cursors in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id",
+                "fetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limit\": \"<integer>\",\n  \"max_xact_id\": \"<string>\",\n  \"max_root_span_id\": \"<string>\",\n  \"version\": \"<string>\",\n  \"filters\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7f973a2-9bff-4017-a600-5341c5bc1244",
+              "name": "Returns the fetched events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"max_xact_id\": \"<string>\",\n  \"max_root_span_id\": \"<string>\",\n  \"version\": \"<string>\",\n  \"filters\": [\n    {\n      \"key_0\": 3195\n    },\n    {\n      \"key_0\": 1122.0042713853018,\n      \"key_1\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    {\n      \"key_0\": 5684.134373216582,\n      \"key_1\": 5904\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12d6a699-2ff9-43f6-bdb8-ff4bb6da8dd3",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limit\": \"<integer>\",\n  \"max_xact_id\": \"<string>\",\n  \"max_root_span_id\": \"<string>\",\n  \"version\": \"<string>\",\n  \"filters\": [\n    {\n      \"key_0\": 3195\n    },\n    {\n      \"key_0\": 1122.0042713853018,\n      \"key_1\": true\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "575c5c6e-960f-46d1-b97a-bbe9220b877d",
+          "name": "Fetch experiment (GET form)",
+          "request": {
+            "name": "Fetch experiment (GET form)",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id",
+                "fetch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_xact_id",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "max_root_span_id",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "125618f1-ff8a-47ce-9faa-d2f655ce8b90",
+              "name": "Returns the fetched events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_xact_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_root_span_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"key_0\": 805.1691821291929\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "47c8212e-968b-42df-94b0-0665d7708247",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "fetch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "max_xact_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_root_span_id",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3404408-7982-4576-ba51-aaeca8aaa572",
+          "name": "Feedback for experiment events",
+          "request": {
+            "name": "Feedback for experiment events",
+            "description": {
+              "content": "Log feedback for a set of experiment events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id",
+                "feedback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feedback\": [\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": 7017.882384438386,\n        \"key_1\": false,\n        \"key_2\": \"string\"\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\",\n        \"key_1\": \"<number>\",\n        \"key_2\": \"<number>\",\n        \"key_3\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\"\n      },\n      \"source\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8dc3ed5-7c66-4410-aacc-812f98289c93",
+              "name": "Success.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feedback\": [\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": false\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"source\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9d4b4dc-5f90-4552-ba07-1dc87644c7b2",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "feedback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"feedback\": [\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": false,\n        \"key_2\": false\n      },\n      \"source\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"scores\": {\n        \"key_0\": \"<number>\"\n      },\n      \"expected\": {},\n      \"comment\": \"<string>\",\n      \"metadata\": {\n        \"key_0\": \"string\",\n        \"key_1\": true\n      },\n      \"source\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0324958b-c937-4932-9a43-c4448da6bd2e",
+          "name": "Summarize experiment",
+          "request": {
+            "name": "Summarize experiment",
+            "description": {
+              "content": "Summarize the scores and metrics of an experiment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "experiment",
+                ":experiment_id",
+                "summarize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "summarize_scores",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "comparison_experiment_id",
+                  "value": "<uuid>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "experiment_id",
+                  "description": "(Required) Experiment id, the unique identifier of the experiment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6bcb903-ef5d-4829-a34a-cb385d948611",
+              "name": "Returns the experiment summary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "summarize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarize_scores",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "comparison_experiment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project_name\": \"string\",\n  \"experiment_name\": \"string\",\n  \"project_url\": \"string\",\n  \"experiment_url\": \"string\",\n  \"comparison_experiment_name\": \"string\",\n  \"scores\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"score\": 6679.755358727132,\n      \"diff\": 1053.817088866712,\n      \"improvements\": 2643,\n      \"regressions\": 4412\n    }\n  },\n  \"metrics\": {\n    \"key_0\": 8103\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f142ac6e-5136-4add-9998-1b1cb46fc7ba",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "experiment",
+                    ":experiment_id",
+                    "summarize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "summarize_scores",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "comparison_experiment_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "experiment_id",
+                      "description": "(Required) Experiment id, the unique identifier of the experiment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6e1c7c03-f561-4527-8968-2d234751e05f",
+    "name": "Braintrust REST ACL Experiments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.\n\nContact Support:\n Name: Braintrust Support\n Email: support@braintrust.dev",
+      "type": "text/plain"
+    }
+  }
+}

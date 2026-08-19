@@ -1,0 +1,194 @@
+{
+  "item": [
+    {
+      "id": "2272bcd9-bdf9-4339-b7e7-03e2ce0de10d",
+      "name": "Evals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "842d9ddc-2323-4a96-8fbf-61b93bfa7b75",
+          "name": "Launch an eval",
+          "request": {
+            "name": "Launch an eval",
+            "description": {
+              "content": "Launch an evaluation. This is the API-equivalent of the Eval function in the SDK; it runs a task function over a dataset and applies scorers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "eval"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"data\": {\n    \"key_0\": 7509,\n    \"key_1\": 943\n  },\n  \"task\": {\n    \"key_0\": false\n  },\n  \"scores\": [\n    {\n      \"key_0\": 4447\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 8757.178196574998\n    }\n  ],\n  \"experiment_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": true,\n    \"key_1\": 6324.54245972277\n  },\n  \"stream\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3022b10-aca9-406d-85ac-fdf46ea82436",
+              "name": "Returns a summary of the launched eval.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "eval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"data\": {\n    \"key_0\": 7498\n  },\n  \"task\": {\n    \"key_0\": false,\n    \"key_1\": 7974.05338062965,\n    \"key_2\": true\n  },\n  \"scores\": [\n    {\n      \"key_0\": 8439,\n      \"key_1\": 6079,\n      \"key_2\": false,\n      \"key_3\": \"string\"\n    },\n    {\n      \"key_0\": 2317.0530586224936,\n      \"key_1\": \"string\"\n    }\n  ],\n  \"experiment_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 9218,\n    \"key_1\": false,\n    \"key_2\": 9286,\n    \"key_3\": 836.8244811717152\n  },\n  \"stream\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"project_name\": \"string\",\n  \"experiment_name\": \"string\",\n  \"project_url\": \"string\",\n  \"experiment_url\": \"string\",\n  \"comparison_experiment_name\": \"string\",\n  \"scores\": {\n    \"key_0\": {\n      \"name\": \"string\",\n      \"score\": 4960.92207527211,\n      \"diff\": 3354.969527019276,\n      \"improvements\": 8087,\n      \"regressions\": 3604\n    },\n    \"key_1\": {\n      \"name\": \"string\",\n      \"score\": 6838.191555052911,\n      \"diff\": 7518.128206790572,\n      \"improvements\": 3109,\n      \"regressions\": 2588\n    }\n  },\n  \"metrics\": {\n    \"key_0\": \"string\",\n    \"key_1\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f12001ed-0eb8-404c-a809-37a5da72ecae",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "eval"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<uuid>\",\n  \"data\": {\n    \"key_0\": 7498\n  },\n  \"task\": {\n    \"key_0\": false,\n    \"key_1\": 7974.05338062965,\n    \"key_2\": true\n  },\n  \"scores\": [\n    {\n      \"key_0\": 8439,\n      \"key_1\": 6079,\n      \"key_2\": false,\n      \"key_3\": \"string\"\n    },\n    {\n      \"key_0\": 2317.0530586224936,\n      \"key_1\": \"string\"\n    }\n  ],\n  \"experiment_name\": \"<string>\",\n  \"metadata\": {\n    \"key_0\": 9218,\n    \"key_1\": false,\n    \"key_2\": 9286,\n    \"key_3\": 836.8244811717152\n  },\n  \"stream\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72c29927-27b9-4a13-b60d-95489cccba35",
+    "name": "Braintrust REST ACL Evals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.\n\nContact Support:\n Name: Braintrust Support\n Email: support@braintrust.dev",
+      "type": "text/plain"
+    }
+  }
+}

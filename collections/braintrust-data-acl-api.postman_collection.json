@@ -1,0 +1,1265 @@
+{
+  "item": [
+    {
+      "id": "bec8d2bb-b064-44a1-a4c4-6123309eb428",
+      "name": "ACL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4d768305-b791-43a8-be5b-92fa9c6d6ded",
+          "name": "List roles",
+          "request": {
+            "name": "List roles",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "role"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4fcf653-42ab-4792-98bf-22d2c8edbfbb",
+              "name": "Returns a list of roles.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"30f6ab07-cad9-c2a5-3af6-51f845c5f25e\",\n      \"org_id\": \"e720247f-d96c-56fb-0f5c-907dc8ee95ba\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"member_permissions\": [\n        {\n          \"key_0\": \"string\",\n          \"key_1\": 5155,\n          \"key_2\": false\n        },\n        {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        }\n      ],\n      \"created\": \"1967-10-08T23:09:17.952Z\"\n    },\n    {\n      \"id\": \"d772c10b-a03a-802f-bd83-e22b92a184a7\",\n      \"org_id\": \"63b3c408-a0fa-1441-2f3c-252df23ba3d2\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"member_permissions\": [\n        {\n          \"key_0\": 5780,\n          \"key_1\": \"string\",\n          \"key_2\": 2050\n        },\n        {\n          \"key_0\": 8537.11964591758,\n          \"key_1\": \"string\",\n          \"key_2\": 200.62754036965114\n        }\n      ],\n      \"created\": \"1978-05-24T10:32:21.025Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1d3089a-bb24-4555-a7dc-7e48353d3783",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1268eb07-44a5-4c1d-b8cc-4262344fdb27",
+          "name": "Create role",
+          "request": {
+            "name": "Create role",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "role"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_permissions\": [\n    {\n      \"key_0\": 2470\n    },\n    {\n      \"key_0\": true,\n      \"key_1\": 5436,\n      \"key_2\": false\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "809642ed-2195-4246-821b-a4abcba4e838",
+              "name": "Returns the new role object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_permissions\": [\n    {\n      \"key_0\": 9058.997119156844,\n      \"key_1\": true,\n      \"key_2\": false,\n      \"key_3\": true\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"90ea14e8-6684-4a20-eb61-5c8b9a887edd\",\n  \"org_id\": \"038f4443-74e5-f90d-5d09-ecef363af9ea\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"member_permissions\": [\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": true\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    }\n  ],\n  \"created\": \"1991-06-13T10:43:43.792Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f9da162-f4f3-42f5-be6b-f949a6651166",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "role"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_permissions\": [\n    {\n      \"key_0\": 9058.997119156844,\n      \"key_1\": true,\n      \"key_2\": false,\n      \"key_3\": true\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce867237-b82c-42ca-aae3-3aaa60c25643",
+          "name": "List groups",
+          "request": {
+            "name": "List groups",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "org_name",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1341c96f-3b9a-4a35-ab3f-c8ffb3d80981",
+              "name": "Returns a list of groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"ea4e76fb-bdb7-f4a1-96ad-18a2356d8949\",\n      \"org_id\": \"f55082c2-a0d9-0549-5f52-f6e25b1d2310\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"member_users\": [\n        \"f3db62dc-6076-85ef-2fff-223f06f47401\",\n        \"6def2d6f-85f1-2f59-ea2c-706b9126f7d5\"\n      ],\n      \"member_groups\": [\n        \"a7f455a6-6926-ce94-e6b7-bcb2f23d1c29\",\n        \"fc6f15eb-e1af-81fc-1261-92a1999fc869\"\n      ],\n      \"created\": \"1985-08-22T18:19:39.446Z\"\n    },\n    {\n      \"id\": \"d34c4211-f392-5f68-4502-1c9ae575b11d\",\n      \"org_id\": \"40ee5bbe-43f3-4721-356e-d0913464610b\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"member_users\": [\n        \"8beba991-ea4b-fc99-d984-94ce294095b3\",\n        \"cea36426-cdbd-bf8e-e046-02ede59385c6\"\n      ],\n      \"member_groups\": [\n        \"9aa964e9-285d-3e2d-b581-f5b176e4787f\",\n        \"d226dc32-659a-4b7e-3ea2-64bd089b50e2\"\n      ],\n      \"created\": \"1954-03-30T03:57:35.933Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40d8d923-a903-4d5f-9b40-84ba83878019",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "org_name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c1bab11-08fe-4693-aec0-3af41677aca2",
+          "name": "Create group",
+          "request": {
+            "name": "Create group",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "group"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "98547e6a-6790-4dd6-8550-b9cfead96dfc",
+              "name": "Returns the new group object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"b1f8953e-9165-b4f5-4cd0-4c1864c0110f\",\n  \"org_id\": \"a0e534c0-41dd-a88c-5f66-63823e2a4ca7\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"member_users\": [\n    \"61501216-315f-fe4b-8843-5764b6f4e6bf\",\n    \"e968ed18-d7c0-d27c-5981-a75fcf13a2a7\"\n  ],\n  \"member_groups\": [\n    \"ffe558ba-7105-4ecd-9c62-2f90fa50499d\",\n    \"1f3c2f32-2b83-ee8d-95b3-254d705a8a86\"\n  ],\n  \"created\": \"1959-03-13T15:27:56.657Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0c050743-a741-493c-a048-8486e7b0bab2",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "group"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"member_users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70f07eac-81d1-4aef-94a7-be45efad8868",
+          "name": "List acls",
+          "request": {
+            "name": "List acls",
+            "description": {
+              "content": "List ACLs for a given object type and id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "acl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of objects to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "object_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "object_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3534d3d9-f3a8-49a5-a80e-16e25efdabef",
+              "name": "Returns a list of ACLs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"objects\": [\n    {\n      \"id\": \"28097c75-a1ce-a768-e171-97852dbda160\",\n      \"object_type\": \"string\",\n      \"object_id\": \"ea8c1e7a-0f9c-1eb3-4755-6cfb3fab9b90\",\n      \"user_id\": \"ca75de86-1301-a3e3-17c6-16a98cb010a2\",\n      \"group_id\": \"205fd6c3-cf5b-2e3f-811e-9ead0ced84b5\",\n      \"permission\": \"update\",\n      \"role_id\": \"34e235b6-491c-8f67-8e89-245d0e17f5c8\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"1972-06-17T18:51:14.749Z\"\n    },\n    {\n      \"id\": \"34b1d14d-5891-5799-4176-25dba213f499\",\n      \"object_type\": \"string\",\n      \"object_id\": \"14ef032e-545b-0f92-0494-f077f62b32ca\",\n      \"user_id\": \"417bbcf1-02d5-cfdc-0aa6-e9f8c2930a64\",\n      \"group_id\": \"81322bac-d2b3-7447-14ff-56b4f158444b\",\n      \"permission\": \"update_acls\",\n      \"role_id\": \"c1445dca-20d7-d5e8-88ac-336833c249d4\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"2013-04-12T20:06:02.580Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7439171-f992-435f-a7e6-007ece28e5bd",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "object_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "object_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dce17e23-a05b-4ef2-affe-b47ba2bfa925",
+          "name": "Create acl",
+          "request": {
+            "name": "Create acl",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "acl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbabc824-11b7-4944-b2d0-1323f98cb97b",
+              "name": "Returns the new ACL object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f018e620-6623-d923-858e-84da68fb5bae\",\n  \"object_type\": \"string\",\n  \"object_id\": \"40bc352c-dbf1-1fb8-2667-2ea9a6278e26\",\n  \"user_id\": \"5e8be8b1-4652-609a-a4c5-0c9e2ddc77e8\",\n  \"group_id\": \"e1a3b8bc-10e6-a558-273a-a48722f1ae9d\",\n  \"permission\": \"update_acls\",\n  \"role_id\": \"06e83589-776d-bdf5-79d5-b18233e64e99\",\n  \"restrict_object_type\": \"string\",\n  \"created\": \"1962-01-02T07:35:55.489Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f58246c1-a3f2-493d-be22-d4a208e031ae",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3efa50d-f545-41f0-a2a9-00837dc375d7",
+          "name": "Delete single acl",
+          "request": {
+            "name": "Delete single acl",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "acl"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d3ba71ae-5914-480d-80e2-2db26f4c0192",
+              "name": "Returns the deleted ACL object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f018e620-6623-d923-858e-84da68fb5bae\",\n  \"object_type\": \"string\",\n  \"object_id\": \"40bc352c-dbf1-1fb8-2667-2ea9a6278e26\",\n  \"user_id\": \"5e8be8b1-4652-609a-a4c5-0c9e2ddc77e8\",\n  \"group_id\": \"e1a3b8bc-10e6-a558-273a-a48722f1ae9d\",\n  \"permission\": \"update_acls\",\n  \"role_id\": \"06e83589-776d-bdf5-79d5-b18233e64e99\",\n  \"restrict_object_type\": \"string\",\n  \"created\": \"1962-01-02T07:35:55.489Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99e69c54-321b-443a-8ad6-5b8a3462bb65",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"object_type\": \"<string>\",\n  \"object_id\": \"<uuid>\",\n  \"user_id\": \"<uuid>\",\n  \"group_id\": \"<uuid>\",\n  \"permission\": \"<string>\",\n  \"role_id\": \"<uuid>\",\n  \"restrict_object_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3121f7de-0240-4cd8-945f-03337ac786c0",
+          "name": "Batch update acls",
+          "request": {
+            "name": "Batch update acls",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "acl",
+                "batch_update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"add_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ],\n  \"remove_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "daca1d14-f242-467d-b2ed-432ea37aea04",
+              "name": "Returns the added and removed ACLs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl",
+                    "batch_update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ],\n  \"remove_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"added_acls\": [\n    {\n      \"id\": \"3ac3b387-a9cc-7d31-e879-109d81ee6efb\",\n      \"object_type\": \"string\",\n      \"object_id\": \"41c3bae0-b5c4-54a0-cc82-c723d31eb6fc\",\n      \"user_id\": \"0b4e3b57-75ff-12bc-95bb-bb51e949477d\",\n      \"group_id\": \"1c27fe96-ddd3-67ee-0d1f-c485f17965d7\",\n      \"permission\": \"create\",\n      \"role_id\": \"5a5901c4-26c4-b506-36be-62d712de5747\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"1971-04-24T18:39:04.546Z\"\n    },\n    {\n      \"id\": \"932ec2ee-e4fd-54aa-4f5b-377324f6262e\",\n      \"object_type\": \"string\",\n      \"object_id\": \"ef35456d-5ddf-7135-a1d8-1bf65c7d182c\",\n      \"user_id\": \"20a3a542-1de8-7853-6268-513cbab24e8a\",\n      \"group_id\": \"5d48a1d1-4346-d264-8e29-324505658101\",\n      \"permission\": \"delete_acls\",\n      \"role_id\": \"0de3710c-4358-06c5-16bb-a767c9c52d89\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"2020-06-15T17:12:11.838Z\"\n    }\n  ],\n  \"removed_acls\": [\n    {\n      \"id\": \"d94f8d72-2d5b-857f-6240-e7369f5f79d9\",\n      \"object_type\": \"string\",\n      \"object_id\": \"73c53738-91f1-6391-a17f-15bac2752133\",\n      \"user_id\": \"6ba1bd00-0f50-dccc-0186-f521bec9e2c2\",\n      \"group_id\": \"3e4b2ef3-c054-e907-3763-566431dec139\",\n      \"permission\": \"delete\",\n      \"role_id\": \"0fecbdff-e52c-008e-6178-7ba551b16e47\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"1997-06-04T03:00:34.610Z\"\n    },\n    {\n      \"id\": \"6cbca9a8-437d-5922-4da1-b85490626314\",\n      \"object_type\": \"string\",\n      \"object_id\": \"81c9b448-e00d-08c2-021b-cfa58431df94\",\n      \"user_id\": \"cb4c149d-327b-4ae3-6354-5084d7a6457d\",\n      \"group_id\": \"a3e5c9e2-b0db-833c-4839-1733d0babf72\",\n      \"permission\": \"update\",\n      \"role_id\": \"ff533d11-8091-3c3c-f3fc-cf04dd68f693\",\n      \"restrict_object_type\": \"string\",\n      \"created\": \"2011-02-05T02:48:47.928Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee872dd2-d97a-47f7-9644-237178bbd3f7",
+              "name": "Authentication failed - missing or invalid API key.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "acl",
+                    "batch_update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"add_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ],\n  \"remove_acls\": [\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    },\n    {\n      \"object_type\": \"<string>\",\n      \"object_id\": \"<uuid>\",\n      \"user_id\": \"<uuid>\",\n      \"group_id\": \"<uuid>\",\n      \"permission\": \"<string>\",\n      \"role_id\": \"<uuid>\",\n      \"restrict_object_type\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.braintrust.dev",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a90a7b42-820e-4a92-9392-62dfbcc44b3d",
+    "name": "Braintrust REST ACL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Braintrust REST API for building, evaluating, and observing AI applications. The API is organized around REST, uses predictable resource-oriented URLs under https://api.braintrust.dev/v1, accepts and returns JSON, and authenticates with a Bearer API key. This specification covers the core documented resource surface - projects, experiments, datasets, logs/spans, prompts, functions and scorers, evals, project configuration, organization/ACL management, credentials, and the OpenAI-compatible AI proxy.\n\nContact Support:\n Name: Braintrust Support\n Email: support@braintrust.dev",
+      "type": "text/plain"
+    }
+  }
+}
