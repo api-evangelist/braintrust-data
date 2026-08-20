@@ -22,6 +22,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/braintrust-data.png
 tags:
+- Artificial Intelligence
+- LLM
+- Evaluation
+- Observability
+- LLMOps
+tags_raw:
 - AI
 - LLM
 - Evaluation
@@ -378,6 +384,8 @@ apis:
   humanURL: https://www.braintrust.dev/docs/api-reference
   baseURL: https://api.braintrust.dev/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
